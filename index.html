@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Servidor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Inter',sans-serif;
+      background:#020617;
+      color:#e2e8f0;
+      min-height:100vh;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      padding:20px 40px;
+      background:rgba(255,255,255,0.03);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+    }
+
+    h1{font-size:1.4rem}
+
+    .hero{
+      text-align:center;
+      padding:50px 20px;
+    }
+
+    .hero h2{
+      font-size:2.5rem;
+      margin-bottom:10px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      padding:30px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.05);
+      padding:20px;
+      border-radius:14px;
+      transition:.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 10px 25px rgba(0,0,0,.5);
+    }
+
+    .stat{
+      font-size:2rem;
+      font-weight:700;
+      margin-top:10px;
+    }
+
+    .terminal{
+      margin:30px;
+      background:#000;
+      border-radius:10px;
+      padding:20px;
+      font-family:'JetBrains Mono', monospace;
+      color:#22c55e;
+      height:200px;
+      overflow:auto;
+    }
+
+    .btn{
+      padding:10px 20px;
+      border:none;
+      background:#22c55e;
+      color:#000;
+      border-radius:8px;
+      cursor:pointer;
+      margin-top:15px;
+    }
+
+    footer{
+      text-align:center;
+      padding:20px;
+      font-size:.8rem;
+      color:#64748b;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🖥️ Server Dashboard</h1>
+  <div id="clock"></div>
+</header>
+
+<section class="hero">
+  <h2>Servidor en funcionamiento ⚡</h2>
+  <p>Panel básico para comprobar estado en tiempo real (simulado)</p>
+</section>
+
+<section class="grid">
+  <div class="card">
+    <h3>CPU</h3>
+    <div class="stat" id="cpu">--%</div>
+  </div>
+  <div class="card">
+    <h3>RAM</h3>
+    <div class="stat" id="ram">--%</div>
+  </div>
+  <div class="card">
+    <h3>Disco</h3>
+    <div class="stat" id="disk">--%</div>
+  </div>
+  <div class="card">
+    <h3>Estado</h3>
+    <div class="stat">🟢 Online</div>
+  </div>
+</section>
+
+<div class="terminal" id="terminal"></div>
+
+<center>
+<button class="btn" onclick="fakeCommand()">Ejecutar chequeo</button>
+</center>
+
+<footer>
+  Dashboard local | Nginx funcionando correctamente
+</footer>
+
+<script>
+function rand(){return Math.floor(Math.random()*100)}
+
+function updateStats(){
+  document.getElementById('cpu').textContent = rand()+'%'
+  document.getElementById('ram').textContent = rand()+'%'
+  document.getElementById('disk').textContent = rand()+'%'
+}
+
+setInterval(updateStats,2000)
+updateStats()
+
+function fakeCommand(){
+  const term = document.getElementById('terminal')
+  const lines = [
+    'Checking services...',
+    'nginx: active ✔',
+    'database: active ✔',
+    'firewall: active ✔',
+    'All systems operational 🚀'
+  ]
+  term.innerHTML = ''
+  let i=0
+  const interval = setInterval(()=>{
+    if(i<lines.length){
+      term.innerHTML += lines[i] + '<br>'
+      term.scrollTop = term.scrollHeight
+      i++
+    } else clearInterval(interval)
+  },500)
+}
+
+function updateClock(){
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString()
+}
+setInterval(updateClock,1000)
+updateClock()
+</script>
+
+</body>
+</html>
