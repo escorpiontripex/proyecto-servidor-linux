@@ -26,13 +26,13 @@ Instalación y configuración de Nginx.
 ## 📸 Evidencias
 
 ### Estado del servicio SSH
-(Aquí pones captura)
+![SSH activo](nginx-installation.png)
 
 ### Estado del servidor Nginx
-(Aquí pones captura)
+![Nginx activo](nginx-running.png)
 
 ### Página web funcionando
-(Aquí pones captura del navegador)
+![Web funcionando](custom-web.png)
 
 ## 🧠 Aprendizaje
 - Uso básico de Linux
